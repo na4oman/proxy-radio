@@ -1,5 +1,5 @@
 import express from 'express'
-import { get } from 'axios'
+import axios from 'axios'
 const app = express()
 const port = 3001 // Choose any available port
 
@@ -12,7 +12,7 @@ app.get('/proxy', async (req, res) => {
       return res.status(400).json({ error: 'Missing URL parameter' })
     }
     // Fetch the audio stream from the original HTTP URL
-    const response = await get(url, { responseType: 'stream' })
+    const response = await axios.get(url, { responseType: 'stream' })
     // Pipe the audio stream to the response
     response.data.pipe(res)
   } catch (error) {
